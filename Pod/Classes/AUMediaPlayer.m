@@ -723,7 +723,7 @@ static void *AVPlayerPlaybackBufferEmptyObservationContext = &AVPlayerPlaybackBu
         }
     }
     
-    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"10.0"))
+    if ([[[UIDevice currentDevice] systemVersion] compare:(@"10.0") options:NSNumericSearch] != NSOrderedAscending)
     {
         [info setObject:@(YES) forKey:MPNowPlayingInfoPropertyIsLiveStream];
     }
