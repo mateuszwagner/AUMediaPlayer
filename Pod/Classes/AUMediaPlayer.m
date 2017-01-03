@@ -730,7 +730,7 @@ static void *AVPlayerPlaybackBufferEmptyObservationContext = &AVPlayerPlaybackBu
     }
     
     float playbackRate = self.playerIsPlaying ? 1.0f : 0.0f;
-    [info setObject:[NSNumber numberWithFloat:playbackRate] forKey:MPNowPlayingInfoPropertyPlaybackRate]
+    [info setObject:[NSNumber numberWithFloat:playbackRate] forKey:MPNowPlayingInfoPropertyPlaybackRate];
     
     [[MPNowPlayingInfoCenter defaultCenter] setNowPlayingInfo:info];
 }
