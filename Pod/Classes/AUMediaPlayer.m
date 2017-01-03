@@ -704,14 +704,9 @@ static void *AVPlayerPlaybackBufferEmptyObservationContext = &AVPlayerPlaybackBu
 }
 
 - (void)updateNowPlayingInfoCenterData {
-    NSDictionary *dictionary = @{MPMediaItemPropertyPlaybackDuration : @(CMTimeGetSeconds(_player.currentItem.duration)),
-                                 MPNowPlayingInfoPropertyElapsedPlaybackTime : @(CMTimeGetSeconds(_player.currentTime))};
+    NSDictionary *dictionary = @{MPMediaItemPropertyPlaybackDuration : @(CMTimeGetSeconds(_player.currentItem.duration))};
     
     NSMutableDictionary *info = [NSMutableDictionary dictionaryWithDictionary:dictionary];
-    
-    if (self.player) {
-        [info setObject:@(self.player.rate) forKey:MPMediaItemPropertyRating];
-    }
     
     if ([self.nowPlayingItem title]) {
         [info setObject:[self.nowPlayingItem title] forKey:MPMediaItemPropertyTitle];
@@ -726,6 +721,11 @@ static void *AVPlayerPlaybackBufferEmptyObservationContext = &AVPlayerPlaybackBu
         if (artwork) {
             [info setObject:artwork forKey:MPMediaItemPropertyArtwork];
         }
+    }
+    
+    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"10.0"))
+    {
+        [info setObject:@(YES) forKey:MPNowPlayingInfoPropertyIsLiveStream];
     }
     
     [[MPNowPlayingInfoCenter defaultCenter] setNowPlayingInfo:info];
