@@ -703,20 +703,6 @@ static void *AVPlayerPlaybackBufferEmptyObservationContext = &AVPlayerPlaybackBu
 }
 
 - (void)updateNowPlayingInfoCenterData {
-    
-    NSDictionary *dictionary = @{};
-    
-    NSMutableDictionary *info = [NSMutableDictionary dictionaryWithDictionary:dictionary];
-    
-    if ([[[UIDevice currentDevice] systemVersion] compare:(@"10.0") options:NSNumericSearch] != NSOrderedAscending)
-    {
-        [info setObject:@(YES) forKey:MPNowPlayingInfoPropertyIsLiveStream];
-    }
-    
-    float playbackRate = self.playerIsPlaying ? 1.0f : 0.0f;
-    [info setObject:[NSNumber numberWithFloat:playbackRate] forKey:MPNowPlayingInfoPropertyPlaybackRate];
-    
-    [[MPNowPlayingInfoCenter defaultCenter] setNowPlayingInfo:info];
 }
 
 #pragma mark -
