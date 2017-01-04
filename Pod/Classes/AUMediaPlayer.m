@@ -704,11 +704,14 @@ static void *AVPlayerPlaybackBufferEmptyObservationContext = &AVPlayerPlaybackBu
 }
 
 - (void)updateNowPlayingInfoCenterData {
-    NSDictionary *dictionary = @{MPMediaItemPropertyPlaybackDuration : @(CMTimeGetSeconds(_player.currentItem.duration)),MPNowPlayingInfoPropertyElapsedPlaybackTime : @(CMTimeGetSeconds(_player.currentTime))};
+//    NSDictionary *dictionary = @{MPMediaItemPropertyPlaybackDuration : @(CMTimeGetSeconds(_player.currentItem.duration)),MPNowPlayingInfoPropertyElapsedPlaybackTime : @(CMTimeGetSeconds(_player.currentTime))};
     
+    NSDictionary *dictionary = @{MPNowPlayingInfoPropertyElapsedPlaybackTime : @(CMTimeGetSeconds(_player.currentTime))};
     
     NSMutableDictionary *info = [NSMutableDictionary dictionaryWithDictionary:dictionary];
     
+    NSLog(@"%f", @(CMTimeGetSeconds(_player.currentTime)));
+
     if ([self.nowPlayingItem title]) {
         [info setObject:[self.nowPlayingItem title] forKey:MPMediaItemPropertyTitle];
     }
