@@ -105,7 +105,6 @@ static void *AVPlayerPlaybackBufferEmptyObservationContext = &AVPlayerPlaybackBu
 
 - (void)setNowPlayingCover:(UIImage *)nowPlayingCover {
     _nowPlayingCover = nowPlayingCover;
-    [self updateNowPlayingInfoCenterData];
 }
 
 #pragma mark -
@@ -704,28 +703,10 @@ static void *AVPlayerPlaybackBufferEmptyObservationContext = &AVPlayerPlaybackBu
 }
 
 - (void)updateNowPlayingInfoCenterData {
-//    NSDictionary *dictionary = @{MPMediaItemPropertyPlaybackDuration : @(CMTimeGetSeconds(_player.currentItem.duration)),MPNowPlayingInfoPropertyElapsedPlaybackTime : @(CMTimeGetSeconds(_player.currentTime))};
     
-    NSDictionary *dictionary = @{MPNowPlayingInfoPropertyElapsedPlaybackTime : @(CMTimeGetSeconds(_player.currentTime))};
+    NSDictionary *dictionary = @{};
     
     NSMutableDictionary *info = [NSMutableDictionary dictionaryWithDictionary:dictionary];
-    
-    NSLog(@"%f", @(CMTimeGetSeconds(_player.currentTime)));
-
-    if ([self.nowPlayingItem title]) {
-        [info setObject:[self.nowPlayingItem title] forKey:MPMediaItemPropertyTitle];
-    }
-    
-    if ([self.nowPlayingCover respondsToSelector:@selector(author)] && [self.nowPlayingItem author]) {
-        [info setObject:[self.nowPlayingItem author] forKey:MPMediaItemPropertyArtist];
-    }
-    
-    if (self.nowPlayingCover) {
-        MPMediaItemArtwork *artwork = [[MPMediaItemArtwork alloc] initWithImage:self.nowPlayingCover];
-        if (artwork) {
-            [info setObject:artwork forKey:MPMediaItemPropertyArtwork];
-        }
-    }
     
     if ([[[UIDevice currentDevice] systemVersion] compare:(@"10.0") options:NSNumericSearch] != NSOrderedAscending)
     {
