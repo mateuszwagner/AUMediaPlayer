@@ -323,7 +323,12 @@ static void *AVPlayerPlaybackBufferEmptyObservationContext = &AVPlayerPlaybackBu
 }
 
 - (void)seekToEnd {
-    [_player seekToTime:_player.currentItem.duration toleranceBefore:kCMTimeZero toleranceAfter:kCMTimePositiveInfinity];
+    CMTimeRange seekableRange = [_player.currentItem.seekableTimeRanges.lastObject CMTimeRangeValue];
+    CGFloat seekableStart = CMTimeGetSeconds(seekableRange.start);
+    CGFloat seekableDuration = CMTimeGetSeconds(seekableRange.duration);
+    CGFloat livePosition = seekableStart + seekableDuration;
+    
+    [_player seekToTime:CMTimeMake(livePosition, 1)];
 }
 
 - (void)setShuffleOn:(BOOL)shuffle {
