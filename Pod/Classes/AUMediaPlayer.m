@@ -322,6 +322,10 @@ static void *AVPlayerPlaybackBufferEmptyObservationContext = &AVPlayerPlaybackBu
     }];
 }
 
+- (void)seekToEnd() {
+    [_player seekToTime:_player.currentItem.duration toleranceBefore:kCMTimeZero toleranceAfter:kCMTimePositiveInfinity];
+}
+
 - (void)setShuffleOn:(BOOL)shuffle {
     if (shuffle && self.queue && self.queue.count > 1) {
         [self shuffleQueue];
