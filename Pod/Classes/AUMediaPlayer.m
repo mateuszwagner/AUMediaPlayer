@@ -322,7 +322,7 @@ static void *AVPlayerPlaybackBufferEmptyObservationContext = &AVPlayerPlaybackBu
     }];
 }
 
-- (void)seekToEnd() {
+- (void)seekToEnd {
     [_player seekToTime:_player.currentItem.duration toleranceBefore:kCMTimeZero toleranceAfter:kCMTimePositiveInfinity];
 }
 

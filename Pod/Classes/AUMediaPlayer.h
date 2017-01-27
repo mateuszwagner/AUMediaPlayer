@@ -271,7 +271,7 @@ typedef NS_ENUM(NSUInteger, AUMediaReceiverType){
  *  @param moment playback moment given by floating point number from 0 to 1
  */
 - (void)seekToMoment:(double)moment;
-
+- (void)seekToEnd;
 - (void)setShuffleOn:(BOOL)shuffle;
 - (void)setRepeatMode:(AUMediaRepeatMode)repeat;
 /**
